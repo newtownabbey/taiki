@@ -9,10 +9,10 @@ function doSomething(paramOne, paramTwo) {
 }
 
 //set one
-var foo = doSomething(2, 2); //48 * 2
+foo = doSomething(2, 2); //48 * 2
 
 //set two
-var bar = doSomething(3, 2); // 56 * 2
+bar = doSomething(3, 2); // 56 * 2
 
 alert(foo);
 alert(bar);
