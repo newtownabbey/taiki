@@ -1,0 +1,111 @@
+<!DOCTYPE html>  <html> <head>   <title>5ch.js</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               5ch.js             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>               <h1>Eloquent Javascript Tutorial</h1>
+
+<h2>Error Handling</h2>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p><a href="http://eloquentjavascript.net/chapter5.html">Chapter 5</a></p>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <p>What if the function can already return every possible kind of value?
+So did the array have a last element? Looking at the value lastElement returns, it is impossible to say.</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="kd">var</span> <span class="nx">lastElement</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">array</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">array</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nx">array</span><span class="p">[</span><span class="nx">array</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+    <span class="k">else</span>
+        <span class="k">return</span> <span class="kc">undefined</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">lastElement</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">]));</span></pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <p>The theory behind exception handling goes like this: It is possible for code to raise (or throw) an exception, which is a value. Raising an exception somewhat resembles a super-charged return from a function . it does not just jump out of the current function, but also out of its callers, all the way up to the top-level call that started the current execution.
+ Fortunately, it is possible to set obstacles for exceptions along the stack. These 'catch' the exception as it is zooming down, and can do something with it, after which the program continues running at the point where the exception was caught.
+ Note that the function lastElementPlusTen completely ignores the possibility that lastElement might go wrong. This is the big advantage of exceptions . error-handling code is only necessary at the point where the error occurs, and the point where it is handled. The functions in between can forget all about it.</p>
+
+<p>Well, almost.</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="kd">function</span> <span class="nx">lastElement2</span><span class="p">(</span><span class="nx">array</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">array</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nx">array</span><span class="p">[</span><span class="nx">array</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+    <span class="k">else</span>
+        <span class="k">throw</span> <span class="s2">&quot;Can not take the last element of an empty array.&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">lastElementPlusTen</span><span class="p">(</span><span class="nx">array</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">lastElement2</span><span class="p">(</span><span class="nx">array</span><span class="p">)</span> <span class="o">+</span> <span class="mi">10</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">try</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">lastElementPlusTen</span><span class="p">([]));</span>
+<span class="p">}</span>
+
+<span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Something went wrong: &quot;</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="cm">/* lastElementPlusTen([1]); */</span></pre></div>             </td>           </tr>                               <tr id="section-5">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-5">&#182;</a>               </div>               <p>Consider the following: A function processThing wants to set a top-level variable currentThing to point to a specific thing while its body executes, so that other functions can have access to that thing too. Normally you would of course just pass the thing as an argument, but assume for a moment that that is not practical. When the function finishes, currentThing should be set back to null.
+But what if the complicated processing raises an exception? In that case the call to processThing will be thrown off the stack by the exception, and currentThing will never be reset to null.</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="kd">var</span> <span class="nx">currentThing</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">processThing</span><span class="p">(</span><span class="nx">thing</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">currentThing</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span>
+        <span class="k">throw</span> <span class="s2">&quot;Oh no! We are already processing a thing!&quot;</span><span class="p">;</span>
+
+    <span class="nx">currentThing</span> <span class="o">=</span> <span class="nx">thing</span><span class="p">;</span>
+    <span class="cm">/* do complicated processing... */</span>
+    <span class="nx">currentThing</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+<span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-6">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-6">&#182;</a>               </div>               <p>try statements can also be followed by a finally keyword, which means 'no matter what happens, run this code after trying to run the code in the try block'. If a function has to clean something up, the cleanup code should usually be put into a finally block:</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="kd">function</span> <span class="nx">processThing</span><span class="p">(</span><span class="nx">thing</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">currentThing</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span>
+        <span class="k">throw</span> <span class="s2">&quot;Oh no! We are already processing a thing!&quot;</span><span class="p">;</span>
+
+    <span class="nx">currentThing</span> <span class="o">=</span> <span class="nx">thing</span><span class="p">;</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="cm">/* do complicated processing... */</span>
+    <span class="p">}</span>
+    <span class="k">finally</span> <span class="p">{</span>
+        <span class="nx">currentThing</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-7">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-7">&#182;</a>               </div>               <p>some tests:</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="kd">var</span> <span class="nx">errorTest</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;hallo &quot;</span> <span class="o">+</span> <span class="nx">name</span> <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">errorTest</span><span class="p">(</span><span class="s2">&quot;Ulrich&quot;</span><span class="p">);</span>
+<span class="cm">/*</span>
+<span class="cm">   try {</span>
+<span class="cm">   var errorTest2 = function(name) {</span>
+<span class="cm">   console.log(&quot;hallo &quot; + name );</span>
+<span class="cm">   }</span>
+
+<span class="cm">   }</span>
+<span class="cm">   errorTest2(&quot;Uli&quot;);</span>
+<span class="cm">   */</span>
+
+<span class="k">try</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Foo</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Caught: &quot;</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+
+<span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-8">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-8">&#182;</a>               </div>               <p>Most programmers consider exceptions purely an error-handling mechanism. In essence, though, they are just another way of influencing the control flow of a program. For example, they can be used as a kind of break statement in a recursive function. Here is a slightly strange function which determines whether an object, and the objects stored inside it, contain at least seven true values.
+The inner function count is recursively called for every object that is part of the argument. When the variable counted reaches seven, there is no point in continuing to count, but just returning from the current call to count will not necessarily stop the counting, since there might be more calls below it. So what we do is just throw a value, which will cause the control to jump right out of any calls to count, and land at the catch block.</p>
+
+<p>But just returning true in case of an exception is not correct. Something else might be going wrong, so we first check whether the exception is the object FoundSeven, created specifically for this purpose. If it is not, this catch block does not know how to handle it, so it raises it again.</p>
+
+<p>This is a pattern that is also common when dealing with error conditions . you have to make sure that your catch block only handles exceptions that it knows how to handle. Throwing string values, as some of the examples in this chapter do, is rarely a good idea, because it makes it hard to recognise the type of the exception. A better idea is to use unique values, such as the FoundSeven object, or to introduce a new type of objects, as described in chapter 8.</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="kd">var</span> <span class="nx">FoundSeven</span> <span class="o">=</span> <span class="p">{};</span>
+
+<span class="kd">function</span> <span class="nx">hasSevenTruths</span><span class="p">(</span><span class="nx">object</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">counted</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="kd">function</span> <span class="nx">count</span><span class="p">(</span><span class="nx">object</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">name</span> <span class="k">in</span> <span class="nx">object</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">object</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">===</span> <span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">counted</span><span class="o">++</span><span class="p">;</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">counted</span> <span class="o">==</span> <span class="mi">7</span><span class="p">)</span>
+                    <span class="k">throw</span> <span class="nx">FoundSeven</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">object</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;object&quot;</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">count</span><span class="p">(</span><span class="nx">object</span><span class="p">[</span><span class="nx">name</span><span class="p">]);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="nx">count</span><span class="p">(</span><span class="nx">object</span><span class="p">);</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">catch</span> <span class="p">(</span><span class="nx">exception</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">exception</span> <span class="o">!=</span> <span class="nx">FoundSeven</span><span class="p">)</span>
+            <span class="k">throw</span> <span class="nx">exception</span><span class="p">;</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 
