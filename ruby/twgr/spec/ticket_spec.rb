@@ -14,4 +14,11 @@ describe Ticket do
     end
   end
 
+  describe "method available?" do
+    it "should test available methods" do
+      expect(Ticket.new().sendtest('performer')).to eq("Mark Twain")
+    end
+  end
+  
+
 end

@@ -31,7 +31,15 @@ class Ticket
     false
   end
 
+  def sendtest(request)
+    if self.respond_to?(request)
+      self.send(request)
+    else
+      puts "no such information available"
+    end
+  end
 
   # puts "this is for: #{event}, at #{venue}. The performer is #{performer}"
 
 end
+
