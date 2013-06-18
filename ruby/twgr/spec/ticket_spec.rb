@@ -4,7 +4,7 @@ describe Ticket do
 
   describe "venue" do
     it "should be Town Hall" do
-      expect(Ticket.new().venue).to eq("Town Hall")
+      expect(Ticket.new().set_venue("Town Hall")).to eq("Town Hall")
     end
   end
 

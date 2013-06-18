@@ -1,27 +1,31 @@
 class Ticket
 
-  def venue
-    "Town Hall"
+  def set_venue(string)
+    @venue = string
   end
 
-  def performer
-    "Mark Twain"
+  def get_venue
+    @venue
   end
 
-  def event
-    "Author's reading"
+  def set_performer(string)
+    @performer = string
   end
 
-  def price
-    5.50
+  def set_event(string)
+    @event = string
   end
 
-  def seat
-    "secondary balcony, row J, seat 12"
+  def set_price(float)
+    @price = float
   end
 
-  def date
-    "01/02/03"
+  def set_seat(string)
+    @seat = string
+  end
+
+  def set_date(date)
+    @date = date
   end
 
   # def availability_status
