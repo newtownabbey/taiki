@@ -9,3 +9,7 @@ class Ticket
   end
 end
 
+my_ticket = Ticket.new
+my_ticket.price = 8.5
+
+p
