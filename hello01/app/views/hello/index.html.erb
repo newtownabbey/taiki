@@ -1,5 +1,5 @@
 <h1><%= @message %></h1>
 <p>Find me in app/views/hello/index.html.erb</p>
-<% for i in 1..@count %>
+<% (1..@count).each do |i| %>
 <p><%= @bonus %></p>
 <% end %>
